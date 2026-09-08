@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+    Configure Persona Devouring Pawn here by defName, not translated label.
+    Blacklisted traits are ignored and cannot be devoured.
+    A replacement rule removes each replaced trait when replacementTrait is
+    devoured, and suppresses future copies while replacementTrait is owned.
+  -->
+  <OMWPersonaDevouringPawn.PersonaDevouringTraitRuleDef>
+    <defName>OMW_PersonaDevouringTraitRules</defName>
+    <blacklistedTraits>
+      <!-- <li>WeaponTraitDefToBlacklist</li> -->
+    </blacklistedTraits>
+    <replacementRules>
+      <!--
+      <li>
+        <replacementTrait>StrongerTraitDef</replacementTrait>
+        <replacedTraits>
+          <li>WeakerTraitDef</li>
+        </replacedTraits>
+      </li>
+      -->
+    </replacementRules>
+  </OMWPersonaDevouringPawn.PersonaDevouringTraitRuleDef>
+</Defs>

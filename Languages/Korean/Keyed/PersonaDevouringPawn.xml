@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <OMW_Devour>포식</OMW_Devour>
+  <OMW_SettingsCategory>페르소나 특성 포식자</OMW_SettingsCategory>
+  <OMW_SettingsDumpDescription>로드된 모든 페르소나 무기 특성을 docs/WeaponTraitDefs.xml에 내보냅니다. 포식 상태와 대체 관계를 포함합니다.</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpButton>로드된 WeaponTraitDefs 내보내기</OMW_SettingsDumpButton>
+  <OMW_SettingsDumpSuccess>WeaponTraitDefs 덤프를 {PATH}에 저장했습니다.</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>WeaponTraitDefs 덤프에 실패했습니다: {ERROR}</OMW_SettingsDumpFailure>
+  <OMW_DevourReport>페르소나 무기를 포식하는 중.</OMW_DevourReport>
+  <OMW_DevouredPersonaLabel>포식함: {0}</OMW_DevouredPersonaLabel>
+  <OMW_DevouredPersonaUnknown>포식한 페르소나 능력</OMW_DevouredPersonaUnknown>
+  <OMW_DevourNotEligible>이 폰은 페르소나 능력을 포식할 수 없습니다.</OMW_DevourNotEligible>
+  <OMW_DevourNotPersonaWeapon>페르소나 무기가 아닙니다.</OMW_DevourNotPersonaWeapon>
+  <OMW_DevourApparelExcluded>착용 중인 의류는 포식할 수 없습니다.</OMW_DevourApparelExcluded>
+  <OMW_DevourInvalidLocation>이 무기는 바닥에 있거나 이 폰의 소지품에 있어야 합니다.</OMW_DevourInvalidLocation>
+  <OMW_DevourNoAbilities>이 무기에는 이전할 수 있는 페르소나 능력이 남아 있지 않습니다.</OMW_DevourNoAbilities>
+  <OMW_DevourAlreadyOwned>이 폰은 이 무기의 이전 가능한 능력을 모두 가지고 있습니다.</OMW_DevourAlreadyOwned>
+  <OMW_DevourUnsupported>{0}을(를) 변환할 수 없습니다: {1}</OMW_DevourUnsupported>
+  <OMW_DevourNoAdapter>지원되는 페르소나 효과 어댑터 없음</OMW_DevourNoAdapter>
+  <OMW_DevourUnsupportedWorker>지원되지 않는 페르소나 효과 어댑터: {0}</OMW_DevourUnsupportedWorker>
+  <OMW_DevourNoTransferableStage>원본 헤디프에 이전 가능한 단계가 없습니다</OMW_DevourNoTransferableStage>
+  <OMW_DevourLetterTitle>{PAWN}이(가) {WEAPON}을(를) 포식했습니다</OMW_DevourLetterTitle>
+  <OMW_DevourLetterBody>{PAWN}이(가) 페르소나 능력 {ABILITY}을(를) 얻었습니다.</OMW_DevourLetterBody>
+</LanguageData>

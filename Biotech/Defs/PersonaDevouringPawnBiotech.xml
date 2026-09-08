@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <GeneDef>
+    <defName>OMW_PersonaDevourerGene</defName>
+    <label>persona devourer</label>
+    <labelShortAdj>devouring</labelShortAdj>
+    <description>This gene grants the persona devourer trait, allowing its carrier to consume the beneficial abilities of compatible persona weapons.</description>
+    <iconPath>UI/Icons/Genes/Gene_KindInstinct</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>999</displayOrderInCategory>
+    <forcedTraits>
+      <li>
+        <def>OMW_PersonaDevourer</def>
+      </li>
+    </forcedTraits>
+    <biostatCpx>1</biostatCpx>
+  </GeneDef>
+</Defs>

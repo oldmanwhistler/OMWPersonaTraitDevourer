@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModMetaData>
+  <name>[OMW] Persona Trait Devourer</name>
+  <packageId>oldmanwhistler.PersonaTraitDevourer</packageId>
+  <author>oldmanwhistler</author>
+  <description>Some pawns with the "Persona Devourer" trait can consume persona weapons and gain their beneficial persona abilities.</description>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Royalty</packageId>
+      <displayName>Royalty</displayName>
+    </li>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>brrainz.harmony</li>
+    <li>VanillaExpanded.VPersonaWeaponsE</li>
+    <li>Arquebus.MorePersonaTraits</li>
+    <li>Arquebus.MedievalPersonaWeapons</li>
+  </loadAfter>
+</ModMetaData>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <OMW_Devour>Поглотить</OMW_Devour>
+  <OMW_SettingsCategory>Пожиратель черт персоны</OMW_SettingsCategory>
+  <OMW_SettingsDumpDescription>Экспортировать все загруженные черты оружия-персоны в docs/WeaponTraitDefs.xml вместе со статусом поглощения и отношениями замещения.</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpButton>Экспортировать загруженные WeaponTraitDefs</OMW_SettingsDumpButton>
+  <OMW_SettingsDumpSuccess>Дамп WeaponTraitDefs записан в {PATH}.</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>Не удалось создать дамп WeaponTraitDefs: {ERROR}</OMW_SettingsDumpFailure>
+  <OMW_DevourReport>Поглощает оружие-персону.</OMW_DevourReport>
+  <OMW_DevouredPersonaLabel>Поглощено: {0}</OMW_DevouredPersonaLabel>
+  <OMW_DevouredPersonaUnknown>Поглощённая способность персоны</OMW_DevouredPersonaUnknown>
+  <OMW_DevourNotEligible>Этот пешка не может поглощать способности персон.</OMW_DevourNotEligible>
+  <OMW_DevourNotPersonaWeapon>Это не оружие-персона.</OMW_DevourNotPersonaWeapon>
+  <OMW_DevourApparelExcluded>Надетую одежду нельзя поглотить.</OMW_DevourApparelExcluded>
+  <OMW_DevourInvalidLocation>Оружие должно находиться на земле или в инвентаре этой пешки.</OMW_DevourInvalidLocation>
+  <OMW_DevourNoAbilities>В этом оружии больше нет передаваемых способностей персоны.</OMW_DevourNoAbilities>
+  <OMW_DevourAlreadyOwned>Эта пешка уже обладает всеми передаваемыми способностями этого оружия.</OMW_DevourAlreadyOwned>
+  <OMW_DevourUnsupported>Невозможно преобразовать {0}: {1}</OMW_DevourUnsupported>
+  <OMW_DevourNoAdapter>нет поддерживаемого адаптера эффекта персоны</OMW_DevourNoAdapter>
+  <OMW_DevourUnsupportedWorker>неподдерживаемый адаптер эффекта персоны: {0}</OMW_DevourUnsupportedWorker>
+  <OMW_DevourNoTransferableStage>исходная геддиф не содержит передаваемой стадии</OMW_DevourNoTransferableStage>
+  <OMW_DevourLetterTitle>{PAWN} поглотил(а) {WEAPON}</OMW_DevourLetterTitle>
+  <OMW_DevourLetterBody>{PAWN} получил(а) способность персоны {ABILITY}.</OMW_DevourLetterBody>
+</LanguageData>

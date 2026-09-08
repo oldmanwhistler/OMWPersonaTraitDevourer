@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <OMW_Devour>喰らう</OMW_Devour>
+  <OMW_SettingsCategory>ペルソナ特性捕食者</OMW_SettingsCategory>
+  <OMW_SettingsDumpDescription>読み込まれたすべてのペルソナ武器特性を、捕食状態と上書き関係を含めて docs/WeaponTraitDefs.xml に出力します。</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpButton>読み込み済み WeaponTraitDefs を出力</OMW_SettingsDumpButton>
+  <OMW_SettingsDumpSuccess>WeaponTraitDefs のダンプを {PATH} に書き出しました。</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>WeaponTraitDefs のダンプに失敗しました：{ERROR}</OMW_SettingsDumpFailure>
+  <OMW_DevourReport>ペルソナ武器を喰らっている。</OMW_DevourReport>
+  <OMW_DevouredPersonaLabel>捕食済み：{0}</OMW_DevouredPersonaLabel>
+  <OMW_DevouredPersonaUnknown>捕食したペルソナ能力</OMW_DevouredPersonaUnknown>
+  <OMW_DevourNotEligible>このポーンはペルソナ能力を喰らえません。</OMW_DevourNotEligible>
+  <OMW_DevourNotPersonaWeapon>これはペルソナ武器ではありません。</OMW_DevourNotPersonaWeapon>
+  <OMW_DevourApparelExcluded>着用中の衣服は喰らえません。</OMW_DevourApparelExcluded>
+  <OMW_DevourInvalidLocation>武器は地面か、このポーンのインベントリにある必要があります。</OMW_DevourInvalidLocation>
+  <OMW_DevourNoAbilities>移行可能なペルソナ能力がこの武器に残っていません。</OMW_DevourNoAbilities>
+  <OMW_DevourAlreadyOwned>このポーンは、この武器の移行可能な能力をすべて持っています。</OMW_DevourAlreadyOwned>
+  <OMW_DevourUnsupported>{0} は変換できません：{1}</OMW_DevourUnsupported>
+  <OMW_DevourNoAdapter>対応するペルソナ効果アダプターがありません</OMW_DevourNoAdapter>
+  <OMW_DevourUnsupportedWorker>未対応のペルソナ効果アダプター：{0}</OMW_DevourUnsupportedWorker>
+  <OMW_DevourNoTransferableStage>元のヘディフに移行可能なステージがありません</OMW_DevourNoTransferableStage>
+  <OMW_DevourLetterTitle>{PAWN}は{WEAPON}を喰らった</OMW_DevourLetterTitle>
+  <OMW_DevourLetterBody>{PAWN}はペルソナ能力{ABILITY}を得た。</OMW_DevourLetterBody>
+</LanguageData>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <JobDef>
+    <defName>OMW_DevourPersona</defName>
+    <driverClass>OMWPersonaDevouringPawn.JobDriver_DevourPersona</driverClass>
+    <reportString>OMW_DevourReport</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <TraitDef>
+    <defName>OMW_PersonaDevourer</defName>
+    <label>persona devourer</label>
+    <degreeDatas>
+      <li>
+        <degree>0</degree>
+        <label>persona devourer</label>
+        <description>This pawn can consume the beneficial abilities of compatible persona weapons.</description>
+        <commonality>1</commonality>
+      </li>
+    </degreeDatas>
+    <commonality>0.01</commonality>
+    <allowOnHostileSpawn>false</allowOnHostileSpawn>
+  </TraitDef>
+
+  <HediffDef>
+    <defName>OMW_DevouredPersonaTrait</defName>
+    <label>devoured persona trait</label>
+    <description>This pawn has devoured a beneficial persona ability.</description>
+    <hediffClass>OMWPersonaDevouringPawn.Hediff_DevouredPersonaTrait</hediffClass>
+    <isBad>false</isBad>
+    <duplicationAllowed>true</duplicationAllowed>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>1</minSeverity>
+    <maxSeverity>1</maxSeverity>
+  </HediffDef>
+
+  <ThoughtDef>
+    <defName>OMW_DevouredPersonaMemory</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>15</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>persona devouring exhilaration</label>
+        <description>Devouring persona abilities has left me exhilarated.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

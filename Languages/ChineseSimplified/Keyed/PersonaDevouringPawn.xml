@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <OMW_Devour>吞噬</OMW_Devour>
+  <OMW_SettingsCategory>人格特质吞噬者</OMW_SettingsCategory>
+  <OMW_SettingsDumpDescription>将所有已加载的人格武器特质导出到 docs/WeaponTraitDefs.xml，并包含吞噬状态和替代关系。</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpButton>导出已加载的 WeaponTraitDefs</OMW_SettingsDumpButton>
+  <OMW_SettingsDumpSuccess>WeaponTraitDefs 已写入 {PATH}。</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>导出 WeaponTraitDefs 失败：{ERROR}</OMW_SettingsDumpFailure>
+  <OMW_DevourReport>正在吞噬人格武器。</OMW_DevourReport>
+  <OMW_DevouredPersonaLabel>已吞噬：{0}</OMW_DevouredPersonaLabel>
+  <OMW_DevouredPersonaUnknown>已吞噬的人格能力</OMW_DevouredPersonaUnknown>
+  <OMW_DevourNotEligible>此殖民者无法吞噬人格能力。</OMW_DevourNotEligible>
+  <OMW_DevourNotPersonaWeapon>这不是人格武器。</OMW_DevourNotPersonaWeapon>
+  <OMW_DevourApparelExcluded>无法吞噬穿戴中的服装。</OMW_DevourApparelExcluded>
+  <OMW_DevourInvalidLocation>武器必须在地面上或在该殖民者的物品栏中。</OMW_DevourInvalidLocation>
+  <OMW_DevourNoAbilities>该武器没有剩余的可转移人格能力。</OMW_DevourNoAbilities>
+  <OMW_DevourAlreadyOwned>该殖民者已经拥有此武器的所有可转移能力。</OMW_DevourAlreadyOwned>
+  <OMW_DevourUnsupported>无法转换 {0}：{1}</OMW_DevourUnsupported>
+  <OMW_DevourNoAdapter>没有受支持的人格效果适配器</OMW_DevourNoAdapter>
+  <OMW_DevourUnsupportedWorker>不受支持的人格效果适配器：{0}</OMW_DevourUnsupportedWorker>
+  <OMW_DevourNoTransferableStage>源病症没有可转移阶段</OMW_DevourNoTransferableStage>
+  <OMW_DevourLetterTitle>{PAWN}吞噬了{WEAPON}</OMW_DevourLetterTitle>
+  <OMW_DevourLetterBody>{PAWN}获得了人格能力{ABILITY}。</OMW_DevourLetterBody>
+</LanguageData>
