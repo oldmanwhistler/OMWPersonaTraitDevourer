@@ -2,13 +2,13 @@
 <LanguageData>
   <OMW_Devour>Dévorer</OMW_Devour>
   <OMW_SettingsCategory>Dévoreur de traits de persona</OMW_SettingsCategory>
-  <OMW_SettingsDumpDescription>Exporter tous les traits d'armes de persona chargés vers docs/WeaponTraitDefs.xml, avec leur statut de dévoration et leurs relations de remplacement.</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpDescription>Exporter tous les traits d'armes de persona chargés vers docs/WeaponTraits.md, regroupés par source avec descriptions, labels, statut de prise en charge et mécanismes d'adaptation.</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>Exporter les WeaponTraitDefs chargés</OMW_SettingsDumpButton>
   <OMW_SettingsLogAdaptorTriggers>Journaliser les déclenchements des adaptateurs de persona</OMW_SettingsLogAdaptorTriggers>
   <OMW_SettingsLogAdaptorTriggersDescription>Écrire un message lorsqu’un adaptateur de persona dévoré applique réellement un effet.</OMW_SettingsLogAdaptorTriggersDescription>
   <OMW_AdaptorTriggeredLog>{PAWN} a déclenché {TRAIT} : {EFFECT}</OMW_AdaptorTriggeredLog>
-  <OMW_SettingsDumpSuccess>Le fichier WeaponTraitDefs a été écrit dans {PATH}.</OMW_SettingsDumpSuccess>
-  <OMW_SettingsDumpFailure>Échec de l'exportation des WeaponTraitDefs : {ERROR}</OMW_SettingsDumpFailure>
+  <OMW_SettingsDumpSuccess>Le fichier WeaponTraits.md a été écrit dans {PATH}.</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>Échec de l'exportation de WeaponTraits.md : {ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>Dévore une arme de persona.</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>Dévoré : {0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>Capacité de persona dévorée</OMW_DevouredPersonaUnknown>

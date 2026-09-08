@@ -2,13 +2,13 @@
 <LanguageData>
   <OMW_Devour>Поглотить</OMW_Devour>
   <OMW_SettingsCategory>Пожиратель черт персоны</OMW_SettingsCategory>
-  <OMW_SettingsDumpDescription>Экспортировать все загруженные черты оружия-персоны в docs/WeaponTraitDefs.xml вместе со статусом поглощения и отношениями замещения.</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpDescription>Экспортировать все загруженные черты оружия-персоны в docs/WeaponTraits.md, сгруппированные по источнику, с описаниями, метками, статусом поддержки и механизмами адаптации.</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>Экспортировать загруженные WeaponTraitDefs</OMW_SettingsDumpButton>
   <OMW_SettingsLogAdaptorTriggers>Записывать срабатывания адаптеров персоны</OMW_SettingsLogAdaptorTriggers>
   <OMW_SettingsLogAdaptorTriggersDescription>Записывать сообщение, когда поглощённый адаптер персоны успешно применяет эффект.</OMW_SettingsLogAdaptorTriggersDescription>
   <OMW_AdaptorTriggeredLog>{PAWN} активировал {TRAIT}: {EFFECT}</OMW_AdaptorTriggeredLog>
-  <OMW_SettingsDumpSuccess>Дамп WeaponTraitDefs записан в {PATH}.</OMW_SettingsDumpSuccess>
-  <OMW_SettingsDumpFailure>Не удалось создать дамп WeaponTraitDefs: {ERROR}</OMW_SettingsDumpFailure>
+  <OMW_SettingsDumpSuccess>Файл WeaponTraits.md записан в {PATH}.</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>Не удалось экспортировать WeaponTraits.md: {ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>Поглощает оружие-персону.</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>Поглощено: {0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>Поглощённая способность персоны</OMW_DevouredPersonaUnknown>

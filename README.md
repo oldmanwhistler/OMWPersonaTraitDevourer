@@ -78,13 +78,16 @@ Edit `Defs/PersonaDevouringTraitRules.xml` using `WeaponTraitDef.defName` values
 
 ### Settings and diagnostics
 
-Open the mod settings menu and select **Dump loaded WeaponTraitDefs**. This writes `docs/WeaponTraitDefs.xml`, containing every loaded persona trait with:
+Open the mod settings menu and select **Dump loaded WeaponTraitDefs**. This writes `docs/WeaponTraits.md`, grouping every loaded persona trait by mod or DLC with:
 
-- Source mod
-- Devourable, ignored, suppressed, or unsupported status
-- Unsupported classification reason
-- Traits it overrides
-- Traits that override it
+- A mod/DLC heading
+- `Supported`, `Unsupported`, and `Blacklisted` subsections
+- Alphabetized `WeaponTraitDef.defName` sections under each subsection
+- The trait description
+- Label
+- Blacklisted status
+- Unsupported status
+- Adapter mechanism list
 
 ### Debug actions
 

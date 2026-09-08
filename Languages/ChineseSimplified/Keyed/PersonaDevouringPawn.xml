@@ -2,13 +2,13 @@
 <LanguageData>
   <OMW_Devour>吞噬</OMW_Devour>
   <OMW_SettingsCategory>人格特质吞噬者</OMW_SettingsCategory>
-  <OMW_SettingsDumpDescription>将所有已加载的人格武器特质导出到 docs/WeaponTraitDefs.xml，并包含吞噬状态和替代关系。</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpDescription>将所有已加载的人格武器特质导出到 docs/WeaponTraits.md，按来源分组并包含描述、标签、不支持状态和适配机制。</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>导出已加载的 WeaponTraitDefs</OMW_SettingsDumpButton>
   <OMW_SettingsLogAdaptorTriggers>记录人格适配器触发</OMW_SettingsLogAdaptorTriggers>
   <OMW_SettingsLogAdaptorTriggersDescription>每当已吞噬的人格适配器成功应用效果时写入日志。</OMW_SettingsLogAdaptorTriggersDescription>
   <OMW_AdaptorTriggeredLog>{PAWN}触发了{TRAIT}：{EFFECT}</OMW_AdaptorTriggeredLog>
-  <OMW_SettingsDumpSuccess>WeaponTraitDefs 已写入 {PATH}。</OMW_SettingsDumpSuccess>
-  <OMW_SettingsDumpFailure>导出 WeaponTraitDefs 失败：{ERROR}</OMW_SettingsDumpFailure>
+  <OMW_SettingsDumpSuccess>WeaponTraits.md 已写入 {PATH}。</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>导出 WeaponTraits.md 失败：{ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>正在吞噬人格武器。</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>已吞噬：{0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>已吞噬的人格能力</OMW_DevouredPersonaUnknown>

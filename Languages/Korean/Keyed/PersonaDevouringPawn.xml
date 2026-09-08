@@ -2,13 +2,13 @@
 <LanguageData>
   <OMW_Devour>포식</OMW_Devour>
   <OMW_SettingsCategory>페르소나 특성 포식자</OMW_SettingsCategory>
-  <OMW_SettingsDumpDescription>로드된 모든 페르소나 무기 특성을 docs/WeaponTraitDefs.xml에 내보냅니다. 포식 상태와 대체 관계를 포함합니다.</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpDescription>로드된 모든 페르소나 무기 특성을 출처별로 그룹화하여 설명, 라벨, 미지원 여부, 어댑터 메커니즘과 함께 docs/WeaponTraits.md에 내보냅니다.</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>로드된 WeaponTraitDefs 내보내기</OMW_SettingsDumpButton>
   <OMW_SettingsLogAdaptorTriggers>페르소나 어댑터 발동 기록</OMW_SettingsLogAdaptorTriggers>
   <OMW_SettingsLogAdaptorTriggersDescription>삼킨 페르소나 어댑터가 효과를 성공적으로 적용할 때마다 로그를 기록합니다.</OMW_SettingsLogAdaptorTriggersDescription>
   <OMW_AdaptorTriggeredLog>{PAWN}이(가) {TRAIT}을(를) 발동함: {EFFECT}</OMW_AdaptorTriggeredLog>
-  <OMW_SettingsDumpSuccess>WeaponTraitDefs 덤프를 {PATH}에 저장했습니다.</OMW_SettingsDumpSuccess>
-  <OMW_SettingsDumpFailure>WeaponTraitDefs 덤프에 실패했습니다: {ERROR}</OMW_SettingsDumpFailure>
+  <OMW_SettingsDumpSuccess>WeaponTraits.md를 {PATH}에 저장했습니다.</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>WeaponTraits.md 내보내기에 실패했습니다: {ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>페르소나 무기를 포식하는 중.</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>포식함: {0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>포식한 페르소나 능력</OMW_DevouredPersonaUnknown>

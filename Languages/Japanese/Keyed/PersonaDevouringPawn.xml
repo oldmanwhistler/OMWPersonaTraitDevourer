@@ -2,13 +2,13 @@
 <LanguageData>
   <OMW_Devour>喰らう</OMW_Devour>
   <OMW_SettingsCategory>ペルソナ特性捕食者</OMW_SettingsCategory>
-  <OMW_SettingsDumpDescription>読み込まれたすべてのペルソナ武器特性を、捕食状態と上書き関係を含めて docs/WeaponTraitDefs.xml に出力します。</OMW_SettingsDumpDescription>
+  <OMW_SettingsDumpDescription>読み込まれたすべてのペルソナ武器特性を、説明、ラベル、未対応状態、適応メカニズムとともにソース別に docs/WeaponTraits.md へ出力します。</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>読み込み済み WeaponTraitDefs を出力</OMW_SettingsDumpButton>
   <OMW_SettingsLogAdaptorTriggers>ペルソナアダプターの発動をログに記録</OMW_SettingsLogAdaptorTriggers>
   <OMW_SettingsLogAdaptorTriggersDescription>喰らったペルソナアダプターが効果を適用するたびにログへ記録します。</OMW_SettingsLogAdaptorTriggersDescription>
   <OMW_AdaptorTriggeredLog>{PAWN} が {TRAIT} を発動: {EFFECT}</OMW_AdaptorTriggeredLog>
-  <OMW_SettingsDumpSuccess>WeaponTraitDefs のダンプを {PATH} に書き出しました。</OMW_SettingsDumpSuccess>
-  <OMW_SettingsDumpFailure>WeaponTraitDefs のダンプに失敗しました：{ERROR}</OMW_SettingsDumpFailure>
+  <OMW_SettingsDumpSuccess>WeaponTraits.md を {PATH} に書き出しました。</OMW_SettingsDumpSuccess>
+  <OMW_SettingsDumpFailure>WeaponTraits.md の書き出しに失敗しました：{ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>ペルソナ武器を喰らっている。</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>捕食済み：{0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>捕食したペルソナ能力</OMW_DevouredPersonaUnknown>
