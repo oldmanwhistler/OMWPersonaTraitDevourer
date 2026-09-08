@@ -7,11 +7,13 @@ namespace OMWPersonaDevouringPawn
     {
         private readonly PersonaDevouringSettings settings;
         private readonly ModContentPack content;
+        public static PersonaDevouringSettings Settings { get; private set; }
 
         public OMWPersonaDevouringPawnMod(ModContentPack content) : base(content)
         {
             this.content = content;
             settings = GetSettings<PersonaDevouringSettings>();
+            Settings = settings;
             Log.Message($"[{content.Name}] loaded.");
         }
 

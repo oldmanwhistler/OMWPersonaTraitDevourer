@@ -13,10 +13,12 @@ namespace OMWPersonaDevouringPawn
     public sealed class PersonaDevouringSettings : ModSettings
     {
         public string lastDumpStatus;
+        public bool logAdaptorTriggers;
 
         public override void ExposeData()
         {
             Scribe_Values.Look(ref lastDumpStatus, "lastDumpStatus");
+            Scribe_Values.Look(ref logAdaptorTriggers, "logAdaptorTriggers", false);
         }
 
         public void DoWindowContents(Rect inRect, ModContentPack content)
@@ -24,6 +26,11 @@ namespace OMWPersonaDevouringPawn
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
             listing.Label("OMW_SettingsDumpDescription".Translate());
+            listing.Gap(12f);
+            listing.CheckboxLabeled(
+                "OMW_SettingsLogAdaptorTriggers".Translate().ToString(),
+                ref logAdaptorTriggers,
+                "OMW_SettingsLogAdaptorTriggersDescription".Translate().ToString());
             listing.Gap(12f);
 
             if (listing.ButtonText("OMW_SettingsDumpButton".Translate().ToString()))

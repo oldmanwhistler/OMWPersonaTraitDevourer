@@ -3,6 +3,7 @@
   <!--
     Configure Persona Devouring Pawn here by defName, not translated label.
     Blacklisted traits are ignored and cannot be devoured.
+    Explicitly unsupported traits block a weapon containing them.
     A replacement rule removes each replaced trait when replacementTrait is
     devoured, and suppresses future copies while replacementTrait is owned.
   -->
@@ -11,6 +12,9 @@
     <blacklistedTraits>
       <!-- <li>WeaponTraitDefToBlacklist</li> -->
     </blacklistedTraits>
+    <unsupportedTraits>
+      <!-- <li>WeaponTraitDefWithNoSafeAdapter</li> -->
+    </unsupportedTraits>
     <replacementRules>
       <!--
       <li>

@@ -8,6 +8,7 @@ namespace OMWPersonaDevouringPawn
     public sealed class PersonaDevouringTraitRuleDef : Def
     {
         public List<string> blacklistedTraits = new List<string>();
+        public List<string> unsupportedTraits = new List<string>();
         public List<PersonaDevouringTraitReplacement> replacementRules = new List<PersonaDevouringTraitReplacement>();
     }
 
@@ -35,6 +36,22 @@ namespace OMWPersonaDevouringPawn
                 .Any(rule => rule.blacklistedTraits?.Contains(traitDefName) == true);
         }
 
+        public static bool IsExplicitlyUnsupported(WeaponTraitDef trait)
+        {
+            return trait != null && IsExplicitlyUnsupported(trait.defName);
+        }
+
+        public static bool IsExplicitlyUnsupported(string traitDefName)
+        {
+            if (traitDefName.NullOrEmpty())
+            {
+                return false;
+            }
+
+            return DefDatabase<PersonaDevouringTraitRuleDef>.AllDefsListForReading
+                .Any(rule => rule.unsupportedTraits?.Contains(traitDefName) == true);
+        }
+
         public static bool IsReplacedByOwnedTrait(Pawn pawn, WeaponTraitDef incomingTrait)
         {
             if (pawn == null || incomingTrait == null)
@@ -42,13 +59,13 @@ namespace OMWPersonaDevouringPawn
                 return false;
             }
 
-            return AllReplacementsFor(incomingTrait.defName)
+            return RulesReplacing(incomingTrait.defName)
                 .Any(replacement => PersonaDevouring.IsOwned(pawn, replacement.replacementTrait));
         }
 
         public static IEnumerable<string> TraitsOverriddenBy(string replacementTraitDefName)
         {
-            return AllReplacementsFor(replacementTraitDefName)
+            return RulesForReplacement(replacementTraitDefName)
                 .SelectMany(replacement => replacement.replacedTraits ?? Enumerable.Empty<string>())
                 .Distinct();
         }
@@ -69,7 +86,7 @@ namespace OMWPersonaDevouringPawn
                 .Distinct();
         }
 
-        private static IEnumerable<PersonaDevouringTraitReplacement> AllReplacementsFor(string replacedTraitDefName)
+        private static IEnumerable<PersonaDevouringTraitReplacement> RulesReplacing(string replacedTraitDefName)
         {
             if (replacedTraitDefName.NullOrEmpty())
             {
@@ -81,6 +98,19 @@ namespace OMWPersonaDevouringPawn
                 .Where(replacement => replacement != null
                     && !replacement.replacementTrait.NullOrEmpty()
                     && replacement.replacedTraits?.Contains(replacedTraitDefName) == true);
+        }
+
+        private static IEnumerable<PersonaDevouringTraitReplacement> RulesForReplacement(string replacementTraitDefName)
+        {
+            if (replacementTraitDefName.NullOrEmpty())
+            {
+                return Enumerable.Empty<PersonaDevouringTraitReplacement>();
+            }
+
+            return DefDatabase<PersonaDevouringTraitRuleDef>.AllDefsListForReading
+                .SelectMany(rule => rule.replacementRules ?? Enumerable.Empty<PersonaDevouringTraitReplacement>())
+                .Where(replacement => replacement != null
+                    && replacement.replacementTrait == replacementTraitDefName);
         }
     }
 }

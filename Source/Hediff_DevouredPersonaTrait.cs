@@ -12,10 +12,12 @@ namespace OMWPersonaDevouringPawn
     public sealed class Hediff_DevouredPersonaTrait : Hediff
     {
         private string traitDefName;
+        private string bondedWeaponName;
         private HediffStage cachedStage;
         private string cachedLabel;
 
         public string TraitDefName => traitDefName;
+        public string BondedWeaponName => bondedWeaponName;
 
         public override int UIGroupKey => ("OMW_DevouredPersonaTrait_" + (traitDefName ?? string.Empty)).GetHashCode();
 
@@ -28,11 +30,17 @@ namespace OMWPersonaDevouringPawn
             ? null
             : DefDatabase<WeaponTraitDef>.GetNamedSilentFail(traitDefName);
 
-        public void SetTrait(string defName)
+        public void SetTrait(string defName, string sourceWeaponName = null)
         {
             traitDefName = defName;
+            bondedWeaponName = sourceWeaponName;
             cachedStage = null;
             cachedLabel = null;
+        }
+
+        public bool HasBondedThought(ThoughtDef thoughtDef)
+        {
+            return thoughtDef != null && Trait?.bondedThought == thoughtDef;
         }
 
         public override string LabelBase
@@ -73,6 +81,7 @@ namespace OMWPersonaDevouringPawn
         {
             base.ExposeData();
             Scribe_Values.Look(ref traitDefName, "traitDefName");
+            Scribe_Values.Look(ref bondedWeaponName, "bondedWeaponName");
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 cachedStage = null;
@@ -116,10 +125,19 @@ namespace OMWPersonaDevouringPawn
             {
                 return;
             }
-            Thought_Memory memory = ThoughtMaker.MakeThought(thoughtDef) as Thought_Memory;
-            if (memory != null)
+            if (thoughtDef.IsMemory)
             {
-                pawn.needs.mood.thoughts.memories.TryGainMemory(memory);
+                Thought_Memory memory = ThoughtMaker.MakeThought(thoughtDef) as Thought_Memory;
+                if (memory != null)
+                {
+                    pawn.needs.mood.thoughts.memories.TryGainMemory(memory);
+                    TraitEffects.LogAdaptorTriggered(Trait, pawn, "bonded memory thought");
+                }
+            }
+            else if (thoughtDef.ThoughtClass == typeof(Thought_Situational))
+            {
+                pawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
+                TraitEffects.LogAdaptorTriggered(Trait, pawn, "bonded situational thought");
             }
         }
 
@@ -245,6 +263,7 @@ namespace OMWPersonaDevouringPawn
             if (trait.defName == "OnKill_PsyfocusGain")
             {
                 attacker.psychicEntropy?.OffsetPsyfocusDirectly(0.2f);
+                LogAdaptorTriggered(trait, attacker, "on-kill psyfocus gain");
             }
             if (trait.killThought != null && attacker.needs?.mood != null)
             {
@@ -256,18 +275,44 @@ namespace OMWPersonaDevouringPawn
                 if (thought is Thought_Memory memory)
                 {
                     attacker.needs.mood.thoughts.memories.TryGainMemory(memory);
+                    LogAdaptorTriggered(trait, attacker, "on-kill thought");
                 }
             }
 
             string workerName = trait.workerClass?.FullName ?? string.Empty;
-            if (workerName.Contains("FoodFilledOnKill")) FillNeed(attacker, "Food");
-            else if (workerName.Contains("ComfortFilledOnKill")) FillNeed(attacker, "Comfort");
-            else if (workerName.Contains("JoyFilledOnKill")) FillNeed(attacker, "Joy");
-            else if (workerName.Contains("BeautyFilledOnKill")) FillNeed(attacker, "Beauty");
-            else if (workerName.Contains("RestFilledOnKill")) FillNeed(attacker, "Rest");
-            else if (workerName.Contains("InOutdoorsFilledOnKill")) { FillNeed(attacker, "Indoors"); FillNeed(attacker, "Outdoors"); }
-            else if (workerName.Contains("ChemicalFilledOnKill")) FillRandomChemicalNeed(attacker);
-            else if (workerName.Contains("InvisibilityOnKill")) AddTemporaryHediff(attacker, "PsychicInvisibility", 480);
+            if (workerName.Contains("FoodFilledOnKill"))
+            {
+                if (FillNeed(attacker, "Food")) LogAdaptorTriggered(trait, attacker, "on-kill food need");
+            }
+            else if (workerName.Contains("ComfortFilledOnKill"))
+            {
+                if (FillNeed(attacker, "Comfort")) LogAdaptorTriggered(trait, attacker, "on-kill comfort need");
+            }
+            else if (workerName.Contains("JoyFilledOnKill"))
+            {
+                if (FillNeed(attacker, "Joy")) LogAdaptorTriggered(trait, attacker, "on-kill joy need");
+            }
+            else if (workerName.Contains("BeautyFilledOnKill"))
+            {
+                if (FillNeed(attacker, "Beauty")) LogAdaptorTriggered(trait, attacker, "on-kill beauty need");
+            }
+            else if (workerName.Contains("RestFilledOnKill"))
+            {
+                if (FillNeed(attacker, "Rest")) LogAdaptorTriggered(trait, attacker, "on-kill rest need");
+            }
+            else if (workerName.Contains("InOutdoorsFilledOnKill"))
+            {
+                bool filled = FillNeed(attacker, "Indoors") | FillNeed(attacker, "Outdoors");
+                if (filled) LogAdaptorTriggered(trait, attacker, "on-kill indoors/outdoors need");
+            }
+            else if (workerName.Contains("ChemicalFilledOnKill"))
+            {
+                if (FillRandomChemicalNeed(attacker)) LogAdaptorTriggered(trait, attacker, "on-kill chemical need");
+            }
+            else if (workerName.Contains("InvisibilityOnKill"))
+            {
+                if (AddTemporaryHediff(attacker, "PsychicInvisibility", 480)) LogAdaptorTriggered(trait, attacker, "on-kill invisibility");
+            }
 
             ApplyOnKillExtension(trait, attacker, victim);
         }
@@ -291,12 +336,12 @@ namespace OMWPersonaDevouringPawn
                     if (worker == null) continue;
                     float chance = FieldInfoCache.GetFloat(worker, "ProcChance", 1f);
                     if (!Rand.Chance(chance)) continue;
-                    ApplyOnHitWorker(worker, attacker, target);
+                    ApplyOnHitWorker(trait, worker, attacker, target);
                 }
             }
         }
 
-        private static void ApplyOnHitWorker(object worker, Pawn attacker, Thing target)
+        private static void ApplyOnHitWorker(WeaponTraitDef trait, object worker, Pawn attacker, Thing target)
         {
             string name = worker.GetType().Name;
             bool targetSelf = FieldInfoCache.GetBool(worker, "TargetSelf", false);
@@ -309,7 +354,11 @@ namespace OMWPersonaDevouringPawn
             {
                 NeedDef needDef = FieldInfoCache.GetDef<NeedDef>(worker, "NeedDef");
                 Need need = (effectTarget as Pawn)?.needs?.TryGetNeed(needDef);
-                if (need != null) need.CurLevel += need.MaxLevel * FieldInfoCache.GetFloat(worker, "ProcMagnitude", 0f);
+                if (need != null)
+                {
+                    need.CurLevel += need.MaxLevel * FieldInfoCache.GetFloat(worker, "ProcMagnitude", 0f);
+                    LogAdaptorTriggered(trait, attacker, "on-hit need");
+                }
             }
             else if (name.Contains("ApplyHediff"))
             {
@@ -320,11 +369,17 @@ namespace OMWPersonaDevouringPawn
                     Hediff h = HediffMaker.MakeHediff(hediffDef, pawn);
                     h.Severity = FieldInfoCache.GetFloat(worker, "ProcMagnitude", 1f);
                     pawn.health.AddHediff(h);
+                    LogAdaptorTriggered(trait, attacker, "on-hit hediff");
                 }
             }
             else if (name.Contains("ApplyStun"))
             {
-                (effectTarget as Pawn)?.stances?.stunner?.StunFor(GenTicks.SecondsToTicks(FieldInfoCache.GetFloat(worker, "StunDuration", 2f)), attacker, true, true, false);
+                Pawn stunnedPawn = effectTarget as Pawn;
+                if (stunnedPawn?.stances?.stunner != null)
+                {
+                    stunnedPawn.stances.stunner.StunFor(GenTicks.SecondsToTicks(FieldInfoCache.GetFloat(worker, "StunDuration", 2f)), attacker, true, true, false);
+                    LogAdaptorTriggered(trait, attacker, "on-hit stun");
+                }
             }
             else if (name.Contains("HealInjury"))
             {
@@ -336,13 +391,18 @@ namespace OMWPersonaDevouringPawn
                     if (injuries.Count > 0)
                     {
                         injuries.RandomElement().Heal(FieldInfoCache.GetFloat(worker, "ProcMagnitude", 0.125f) * pawn.HealthScale);
+                        LogAdaptorTriggered(trait, attacker, "on-hit injury healing");
                     }
                 }
             }
             else if (name.Contains("SpawnFilth"))
             {
                 ThingDef filth = FieldInfoCache.GetDef<ThingDef>(worker, "Filth");
-                if (filth != null && effectTarget.Spawned) FilthMaker.TryMakeFilth(effectTarget.Position, effectTarget.Map, filth);
+                if (filth != null && effectTarget.Spawned)
+                {
+                    FilthMaker.TryMakeFilth(effectTarget.Position, effectTarget.Map, filth);
+                    LogAdaptorTriggered(trait, attacker, "on-hit filth");
+                }
             }
         }
 
@@ -355,8 +415,22 @@ namespace OMWPersonaDevouringPawn
                 if (hediffDef != null && victim != null)
                 {
                     victim.health.AddHediff(HediffMaker.MakeHediff(hediffDef, victim));
+                    LogAdaptorTriggered(trait, attacker, "on-kill victim hediff");
                 }
             }
+        }
+
+        internal static void LogAdaptorTriggered(WeaponTraitDef trait, Pawn pawn, string effect)
+        {
+            if (trait == null || pawn == null || OMWPersonaDevouringPawnMod.Settings?.logAdaptorTriggers != true)
+            {
+                return;
+            }
+
+            Log.Message("OMW_AdaptorTriggeredLog".Translate(
+                pawn.LabelShortCap.Named("PAWN"),
+                trait.LabelCap.Named("TRAIT"),
+                effect.Named("EFFECT")));
         }
 
         private static bool IsLiving(Thing thing)
@@ -364,26 +438,31 @@ namespace OMWPersonaDevouringPawn
             return thing is Pawn pawn && !pawn.Dead && pawn.RaceProps.IsFlesh;
         }
 
-        private static void FillNeed(Pawn pawn, string defName)
+        private static bool FillNeed(Pawn pawn, string defName)
         {
             NeedDef def = DefDatabase<NeedDef>.GetNamedSilentFail(defName);
             Need need = pawn.needs?.TryGetNeed(def);
-            if (need != null && Rand.Chance(0.2f)) need.CurLevel = need.MaxLevel;
+            if (need == null || !Rand.Chance(0.2f)) return false;
+            need.CurLevel = need.MaxLevel;
+            return true;
         }
 
-        private static void FillRandomChemicalNeed(Pawn pawn)
+        private static bool FillRandomChemicalNeed(Pawn pawn)
         {
             Need need = pawn.needs?.AllNeeds?.FirstOrDefault(x => x is Need_Chemical);
-            if (need != null && Rand.Chance(0.2f)) need.CurLevel = need.MaxLevel;
+            if (need == null || !Rand.Chance(0.2f)) return false;
+            need.CurLevel = need.MaxLevel;
+            return true;
         }
 
-        private static void AddTemporaryHediff(Pawn pawn, string defName, int ticks)
+        private static bool AddTemporaryHediff(Pawn pawn, string defName, int ticks)
         {
             HediffDef def = DefDatabase<HediffDef>.GetNamedSilentFail(defName);
-            if (def == null) return;
+            if (def == null) return false;
             Hediff h = HediffMaker.MakeHediff(def, pawn);
             pawn.health.AddHediff(h);
             HediffUtility.TryGetComp<HediffComp_Disappears>(h)?.SetDuration(ticks);
+            return true;
         }
     }
 

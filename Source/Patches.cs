@@ -7,6 +7,91 @@ using Verse;
 
 namespace OMWPersonaDevouringPawn
 {
+    [HarmonyPatch(typeof(ThoughtWorker_WeaponTrait), "PostProcessLabel")]
+    public static class Patch_ThoughtWorker_WeaponTrait_PostProcessLabel
+    {
+        public static void Postfix(ThoughtWorker_WeaponTrait __instance, Pawn p, string label, ref string __result)
+        {
+            if (__instance == null || p == null || p.equipment?.bondedWeapon != null)
+            {
+                return;
+            }
+
+            string weaponName = PersonaDevouring.GetDevouredBondedWeaponName(p, __instance.def);
+            if (!weaponName.NullOrEmpty())
+            {
+                __result = label.Formatted(p.Named("PAWN"), weaponName.Named("WEAPON")).ToString();
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ThoughtWorker_WeaponTrait), "PostProcessDescription")]
+    public static class Patch_ThoughtWorker_WeaponTrait_PostProcessDescription
+    {
+        public static void Postfix(ThoughtWorker_WeaponTrait __instance, Pawn p, string description, ref string __result)
+        {
+            if (__instance == null || p == null || p.equipment?.bondedWeapon != null)
+            {
+                return;
+            }
+
+            string weaponName = PersonaDevouring.GetDevouredBondedWeaponName(p, __instance.def);
+            if (!weaponName.NullOrEmpty())
+            {
+                __result = description.Formatted(p.Named("PAWN"), weaponName.Named("WEAPON")).ToString();
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ThoughtWorker_WeaponTraitBonded), "CurrentStateInternal")]
+    public static class Patch_ThoughtWorker_WeaponTraitBonded
+    {
+        public static void Postfix(ThoughtWorker_WeaponTraitBonded __instance, Pawn p, ref ThoughtState __result)
+        {
+            if (__result.Active || p == null || __instance?.def == null)
+            {
+                return;
+            }
+
+            if (PersonaDevouring.HasDevouredBondedThought(p, __instance.def))
+            {
+                __result = ThoughtState.ActiveAtStage(0);
+            }
+        }
+    }
+
+    public static class Patch_MorePersonaTraits_FemaleThought
+    {
+        public static void Postfix(ThoughtWorker __instance, Pawn p, ref ThoughtState __result)
+        {
+            if (__result.Active || p == null || p.gender != Gender.Female || __instance?.def == null)
+            {
+                return;
+            }
+
+            if (PersonaDevouring.HasDevouredBondedThought(p, __instance.def))
+            {
+                __result = ThoughtState.ActiveAtStage(0);
+            }
+        }
+
+        public static void TryPatch(Harmony harmony)
+        {
+            Type workerType = AccessTools.TypeByName("MorePersonaTraits.WorkerClasses.ThoughtWorkerClasses.ThoughtWorker_WeaponTraitGenderFemale");
+            if (workerType == null)
+            {
+                return;
+            }
+
+            System.Reflection.MethodInfo target = AccessTools.Method(workerType, "CurrentStateInternal", new[] { typeof(Pawn) });
+            System.Reflection.MethodInfo postfix = AccessTools.Method(typeof(Patch_MorePersonaTraits_FemaleThought), nameof(Postfix));
+            if (target != null && postfix != null)
+            {
+                harmony.Patch(target, postfix: new HarmonyMethod(postfix));
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(Pawn), "Kill")]
     public static class Patch_Pawn_Kill
     {

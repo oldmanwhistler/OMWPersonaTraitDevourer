@@ -261,3 +261,16 @@ __pycache__/
 
 # Image Compression
 *.dds.zstd
+Assemblies/OMWPersonaDevouringPawn.dll
+Assemblies/OMWPersonaDevouringPawn.pdb
+Source/obj/Debug/OMWPersonaDevouringPawn.AssemblyInfo.cs
+Source/obj/Debug/OMWPersonaDevouringPawn.AssemblyInfoInputs.cache
+Source/obj/Debug/OMWPersonaDevouringPawn.assets.cache
+Source/obj/Debug/OMWPersonaDevouringPawn.csproj.AssemblyReference.cache
+Source/obj/Debug/OMWPersonaDevouringPawn.csproj.FileListAbsolute.txt
+Source/obj/Debug/OMWPersonaDevouringPawn.dll
+Source/obj/Debug/OMWPersonaDevouringPawn.GeneratedMSBuildEditorConfig.editorconfig
+Source/obj/Debug/OMWPersonaDevouringPawn.pdb
+Source/obj/project.nuget.cache
+Source/obj/project.assets.json
+Source/obj/OMWPersonaDevouringPawn.csproj.nuget.dgspec.json

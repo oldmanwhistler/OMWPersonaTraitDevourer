@@ -28,7 +28,9 @@ namespace OMWPersonaDevouringPawn
     {
         static OMWStartup()
         {
-            new Harmony("oldmanwhistler.PersonaDevouringPawn").PatchAll();
+            Harmony harmony = new Harmony("oldmanwhistler.PersonaDevouringPawn");
+            harmony.PatchAll();
+            Patch_MorePersonaTraits_FemaleThought.TryPatch(harmony);
         }
     }
 
@@ -64,6 +66,45 @@ namespace OMWPersonaDevouringPawn
         public static bool IsSupportedPersonaWeapon(Thing thing)
         {
             return thing?.TryGetComp<CompBladelinkWeapon>() != null;
+        }
+
+        public static string GetWeaponName(Thing weapon)
+        {
+            if (weapon == null)
+            {
+                return string.Empty;
+            }
+            if (weapon.StyleSourcePrecept != null)
+            {
+                return weapon.StyleSourcePrecept.Label;
+            }
+            CompGeneratedNames compGeneratedNames = weapon.TryGetComp<CompGeneratedNames>();
+            if (compGeneratedNames != null)
+            {
+                return compGeneratedNames.Name;
+            }
+            return weapon.LabelNoCount;
+        }
+
+        public static string GetDevouredBondedWeaponName(Pawn pawn, ThoughtDef thoughtDef)
+        {
+            Hediff_DevouredPersonaTrait hediff = pawn?.health?.hediffSet?.hediffs
+                .OfType<Hediff_DevouredPersonaTrait>()
+                .FirstOrDefault(x => x.HasBondedThought(thoughtDef));
+            if (hediff == null)
+            {
+                return null;
+            }
+            return hediff.BondedWeaponName.NullOrEmpty()
+                ? "OMW_DevouredPersonaWeaponFallback".Translate().ToString()
+                : hediff.BondedWeaponName;
+        }
+
+        public static bool HasDevouredBondedThought(Pawn pawn, ThoughtDef thoughtDef)
+        {
+            return pawn?.health?.hediffSet?.hediffs
+                .OfType<Hediff_DevouredPersonaTrait>()
+                .Any(hediff => hediff.HasBondedThought(thoughtDef)) == true;
         }
 
         public static bool IsOwned(Pawn pawn, WeaponTraitDef trait)
@@ -139,10 +180,27 @@ namespace OMWPersonaDevouringPawn
                 return plan;
             }
 
+            bool hasOwnedTrait = false;
+            bool hasNegativeOrNeutralTrait = false;
+            bool hasOtherIgnoredTrait = false;
             foreach (WeaponTraitDef trait in comp.TraitsListForReading)
             {
-                if (IsOwned(pawn, trait) || PersonaDevouringTraitRules.IsBlacklisted(trait) || PersonaDevouringTraitRules.IsReplacedByOwnedTrait(pawn, trait))
+                if (IsOwned(pawn, trait))
                 {
+                    hasOwnedTrait = true;
+                    plan.ignored.Add(trait);
+                    continue;
+                }
+                if (PersonaDevouringTraitRules.IsBlacklisted(trait))
+                {
+                    hasNegativeOrNeutralTrait |= trait.marketValueOffset <= 0f || trait.neverBond;
+                    hasOtherIgnoredTrait |= trait.marketValueOffset > 0f && !trait.neverBond;
+                    plan.ignored.Add(trait);
+                    continue;
+                }
+                if (PersonaDevouringTraitRules.IsReplacedByOwnedTrait(pawn, trait))
+                {
+                    hasOtherIgnoredTrait = true;
                     plan.ignored.Add(trait);
                     continue;
                 }
@@ -150,6 +208,7 @@ namespace OMWPersonaDevouringPawn
                 TraitDisposition disposition = TraitAdapters.Classify(trait, out string reason);
                 if (disposition == TraitDisposition.Ignored)
                 {
+                    hasNegativeOrNeutralTrait = true;
                     plan.ignored.Add(trait);
                     continue;
                 }
@@ -163,9 +222,22 @@ namespace OMWPersonaDevouringPawn
 
             if (plan.supported.Count == 0)
             {
-                plan.failureReason = plan.ignored.Count > 0
-                    ? "OMW_DevourAlreadyOwned".Translate().ToString()
-                    : "OMW_DevourNoAbilities".Translate().ToString();
+                if (hasNegativeOrNeutralTrait)
+                {
+                    plan.failureReason = "OMW_DevourNegativeOrNeutral".Translate().ToString();
+                }
+                else if (hasOwnedTrait && !hasOtherIgnoredTrait)
+                {
+                    plan.failureReason = "OMW_DevourAlreadyOwned".Translate().ToString();
+                }
+                else if (hasOtherIgnoredTrait)
+                {
+                    plan.failureReason = "OMW_DevourNoTransferableTraits".Translate().ToString();
+                }
+                else
+                {
+                    plan.failureReason = "OMW_DevourNoAbilities".Translate().ToString();
+                }
             }
             return plan;
         }
@@ -210,7 +282,7 @@ namespace OMWPersonaDevouringPawn
             return Evaluate(pawn, weapon).failureReason.NullOrEmpty();
         }
 
-        public static bool TryAddDevouredTrait(Pawn pawn, WeaponTraitDef trait, out Hediff_DevouredPersonaTrait addedHediff, List<Hediff> overriddenHediffs = null)
+        public static bool TryAddDevouredTrait(Pawn pawn, WeaponTraitDef trait, out Hediff_DevouredPersonaTrait addedHediff, List<Hediff> overriddenHediffs = null, string sourceWeaponName = null)
         {
             addedHediff = null;
             if (pawn?.health == null || trait == null || IsOwned(pawn, trait)
@@ -230,7 +302,7 @@ namespace OMWPersonaDevouringPawn
             {
                 throw new InvalidOperationException("The devoured persona hediff could not be created.");
             }
-            addedHediff.SetTrait(trait.defName);
+            addedHediff.SetTrait(trait.defName, sourceWeaponName);
             pawn.health.AddHediff(addedHediff);
 
             foreach (Hediff existing in pawn.health.hediffSet.hediffs.ToList())
@@ -293,9 +365,10 @@ namespace OMWPersonaDevouringPawn
             var overridden = new List<Hediff>();
             try
             {
+                string weaponName = GetWeaponName(weapon);
                 foreach (WeaponTraitDef trait in plan.supported)
                 {
-                    if (!TryAddDevouredTrait(pawn, trait, out Hediff_DevouredPersonaTrait hediff, overridden))
+                    if (!TryAddDevouredTrait(pawn, trait, out Hediff_DevouredPersonaTrait hediff, overridden, weaponName))
                     {
                         throw new InvalidOperationException("The devoured persona trait could not be applied.");
                     }
@@ -412,6 +485,11 @@ namespace OMWPersonaDevouringPawn
         public static TraitDisposition Classify(WeaponTraitDef trait, out string reason)
         {
             reason = null;
+            if (trait != null && PersonaDevouringTraitRules.IsExplicitlyUnsupported(trait))
+            {
+                reason = "OMW_DevourExplicitlyUnsupported".Translate().ToString();
+                return TraitDisposition.Unsupported;
+            }
             if (trait == null || trait.neverBond || trait.marketValueOffset < 0f)
             {
                 return TraitDisposition.Ignored;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Generated from Royalty's loaded WeaponTraitDefs. Identifiers are defNames. -->
+  <OMWPersonaDevouringPawn.PersonaDevouringTraitRuleDef>
+    <defName>OMW_RoyaltyPersonaTraitRules</defName>
+    <blacklistedTraits>
+      <li>PsychicSensitivityDownMinor</li>
+      <li>PsychicSensitivityDownMajor</li>
+      <li>ThoughtMuttering</li>
+      <li>ThoughtWailing</li>
+      <li>OnKill_ThoughtBad</li>
+      <li>NeedKill</li>
+      <li>HungerMaker</li>
+      <li>NeverBond</li>
+      <li>Jealous</li>
+    </blacklistedTraits>
+    <unsupportedTraits />
+    <replacementRules>
+      <!-- Major psychic sensitivity is stronger than minor psychic sensitivity. -->
+      <li>
+        <replacementTrait>PsychicSensitivityUpMajor</replacementTrait>
+        <replacedTraits>
+          <li>PsychicSensitivityUpMinor</li>
+        </replacedTraits>
+      </li>
+      <!-- NoPain is stronger than positive pain offsets from More Persona Traits. -->
+      <li>
+        <replacementTrait>NoPain</replacementTrait>
+        <replacedTraits>
+          <li>MPT_Bonded_PainOffsetDownMajor</li>
+          <li>MPT_Bonded_PainOffsetDownMinor</li>
+        </replacedTraits>
+      </li>
+    </replacementRules>
+  </OMWPersonaDevouringPawn.PersonaDevouringTraitRuleDef>
+</Defs>

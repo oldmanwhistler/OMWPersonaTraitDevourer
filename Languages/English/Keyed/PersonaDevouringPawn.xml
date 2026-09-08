@@ -4,19 +4,26 @@
   <OMW_SettingsCategory>Persona Trait Devourer</OMW_SettingsCategory>
   <OMW_SettingsDumpDescription>Export all loaded persona weapon traits to docs/WeaponTraitDefs.xml, including devour status and override relationships.</OMW_SettingsDumpDescription>
   <OMW_SettingsDumpButton>Dump loaded WeaponTraitDefs</OMW_SettingsDumpButton>
+  <OMW_SettingsLogAdaptorTriggers>Log persona adaptor triggers</OMW_SettingsLogAdaptorTriggers>
+  <OMW_SettingsLogAdaptorTriggersDescription>Write a log message whenever a devoured persona adaptor successfully applies an effect.</OMW_SettingsLogAdaptorTriggersDescription>
+  <OMW_AdaptorTriggeredLog>{PAWN} triggered {TRAIT}: {EFFECT}</OMW_AdaptorTriggeredLog>
   <OMW_SettingsDumpSuccess>WeaponTraitDefs dump written to {PATH}.</OMW_SettingsDumpSuccess>
   <OMW_SettingsDumpFailure>WeaponTraitDefs dump failed: {ERROR}</OMW_SettingsDumpFailure>
   <OMW_DevourReport>Devouring persona weapon.</OMW_DevourReport>
   <OMW_DevouredPersonaLabel>Devoured: {0}</OMW_DevouredPersonaLabel>
   <OMW_DevouredPersonaUnknown>Devoured persona ability</OMW_DevouredPersonaUnknown>
+  <OMW_DevouredPersonaWeaponFallback>devoured persona weapon</OMW_DevouredPersonaWeaponFallback>
   <OMW_DevourNotEligible>This pawn cannot devour persona abilities.</OMW_DevourNotEligible>
   <OMW_DevourNotPersonaWeapon>This is not a persona weapon.</OMW_DevourNotPersonaWeapon>
   <OMW_DevourApparelExcluded>Worn apparel cannot be devoured.</OMW_DevourApparelExcluded>
   <OMW_DevourInvalidLocation>This weapon must be on the ground or in this pawn's inventory.</OMW_DevourInvalidLocation>
   <OMW_DevourNoAbilities>No transferable persona abilities remain.</OMW_DevourNoAbilities>
   <OMW_DevourAlreadyOwned>This pawn already has every transferable ability on this weapon.</OMW_DevourAlreadyOwned>
+  <OMW_DevourNegativeOrNeutral>This weapon has a negative or neutral persona trait that cannot be devoured.</OMW_DevourNegativeOrNeutral>
+  <OMW_DevourNoTransferableTraits>This weapon has no transferable persona traits.</OMW_DevourNoTransferableTraits>
   <OMW_DevourUnsupported>{0} cannot be translated: {1}</OMW_DevourUnsupported>
   <OMW_DevourNoAdapter>no supported persona effect adapter</OMW_DevourNoAdapter>
+  <OMW_DevourExplicitlyUnsupported>configured as unsupported by Persona Trait Devourer rules</OMW_DevourExplicitlyUnsupported>
   <OMW_DevourUnsupportedWorker>unsupported persona effect adapter: {0}</OMW_DevourUnsupportedWorker>
   <OMW_DevourNoTransferableStage>a source hediff has no transferable stage</OMW_DevourNoTransferableStage>
   <OMW_DevourLetterTitle>{PAWN} devoured {WEAPON}</OMW_DevourLetterTitle>
