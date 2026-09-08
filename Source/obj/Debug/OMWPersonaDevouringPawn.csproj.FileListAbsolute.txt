@@ -1,9 +1,0 @@
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.csproj.AssemblyReference.cache
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.AssemblyInfoInputs.cache
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.AssemblyInfo.cs
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.csproj.CoreCompileInputs.cache
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Assemblies\OMWPersonaDevouringPawn.dll
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Assemblies\OMWPersonaDevouringPawn.pdb
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.dll
-C:\Users\Jason.2020.11\AppData\Roaming\Modmixer\workspace\Mods\804e6285a385\Source\obj\Debug\OMWPersonaDevouringPawn.pdb
