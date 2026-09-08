@@ -10,6 +10,11 @@
 	],
 	"settings": {
 		"markdown.extension.completion.enabled": false,
-		"markdown.extension.tableFormatter.enabled": false
+		"markdown.extension.tableFormatter.enabled": false,
+		"cSpell.words": [
+			"devourable",
+			"hediff",
+			"manhwa"
+		]
 	},
 }

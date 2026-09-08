@@ -6,7 +6,7 @@
 
 Pawns with the "Persona Devourer" trait can consume persona weapons and permanently acquire their buffs.
 
-Inspired by on the webtoon [Artifact Devouring Player](https://www.webtoons.com/en/action/artifact-devouring-player/ep-1-player/viewer?title_no=8200&episode_no=2).
+Inspired by on the manhwa [Artifact Devouring Player](https://www.webtoons.com/en/action/artifact-devouring-player/ep-1-player/viewer?title_no=8200&episode_no=2).
 
 ### Simplified Chinese
 
@@ -97,11 +97,12 @@ The first action does not require the pawn to have the Persona Devourer trait, m
 
 ## AI
 
-[AI Disclosure](docs/AI.md)
+[AI Disclosure](https://github.com/oldmanwhistler/OMWPersonaTraitDevourer/blob/main/docs/AI.md)
 
 ## GitHub
 
+[GitHub](https://github.com/oldmanwhistler/OMWPersonaTraitDevourer)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/oldmanwhistler/OMWPersonaTraitDevourer/blob/main/LICENSE.md) file for details.
